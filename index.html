@@ -50,6 +50,7 @@ body {
 		}
 
 		function create() {
+			bulletsound = game.add.audio('bullet')// add sound
 			
 			game.scale.pageAlignHorizontally = true;
 			
@@ -131,6 +132,7 @@ body {
 			//  Fire bullet
 			if (player.alive && fireButton.isDown) {
 				fireBullet();
+				bulletsound.play();
 			}
 
 			//  Keep the shipTrail lined up with the ship
@@ -150,7 +152,7 @@ body {
 				var BULLET_SPACING = 250;
 				//  Grab the first bullet we can from the pool
 				var bullet = bullets.getFirstExists(false);
-
+                                    
 				if (bullet) {
 					//  And fire it
 					//  Make bullet come out of tip of ship with right angle
