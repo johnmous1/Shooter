@@ -30,6 +30,7 @@ body {
 		var bullets;
 		var fireButton;
 		var bulletTimer = 0;
+		var enemy2;
 
 		var ACCLERATION = 600;
 		var DRAG = 400;
@@ -45,6 +46,7 @@ body {
 			game.load.image('starfield', 'assets/starfield.png');
 			game.load.image('ship', 'assets/ship.png');
 			game.load.image('bullet', 'assets/bullets/bullet.png');
+			game.load.image('enemy2', 'assets/enemies/enemy2.png');///add enemy2
 			game.load.audio('bullet','audio/laser1.mp3');
 
 		}
@@ -89,6 +91,20 @@ body {
 			shipTrail.setScale(0.05, 0.4, 0.05, 0.4, 2000,
 					Phaser.Easing.Quintic.Out);
 			shipTrail.start(false, 5000, 10);
+			////////enemies
+			enemy2 = game.add.group();
+                        enemy2.enableBody = true;
+    			enemy2.physicsBodyType = Phaser.Physics.ARCADE;
+  			enemy2.createMultiple(5, 'enemy-green');
+   			enemy2.setAll('anchor.x', 0.5);
+  			enemy2.setAll('anchor.y', 0.5);
+  			enemy2.setAll('scale.x', 0.5);
+   			enemy2.setAll('scale.y', 0.5);
+    			enemy2.setAll('angle', 180);
+    			enemy2.setAll('outOfBoundsKill', true);
+   			enemy2.setAll('checkWorldBounds', true);
+
+                        launchEnemy2();
 
 		}
 
@@ -168,6 +184,24 @@ body {
 				}
 			}
 		}
+	   function launchEnemy2() {
+              var MIN_ENEMY_SPACING = 300;
+   	      var MAX_ENEMY_SPACING = 3000;
+	      var ENEMY_SPEED = 300;
+
+	      var enemy = enemy2.getFirstExists(false);
+   		 if (enemy) {
+        		enemy.reset(game.rnd.integerInRange(0, game.width), -20);
+       			 enemy.body.velocity.x = game.rnd.integerInRange(-300, 300);
+       			 enemy.body.velocity.y = ENEMY_SPEED;
+     			 enemy.body.drag.x = 100;
+   }
+
+    //  Send another enemy soon
+    game.time.events.add(game.rnd.integerInRange(MIN_ENEMY_SPACING, MAX_ENEMY_SPACING), launchGreenEnemy);
+}
+		
+		
 	</script>
 </body>
 </html>
