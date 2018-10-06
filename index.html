@@ -307,9 +307,9 @@ body {
         
         function restart () {
     //  Reset the enemies
-    greenEnemies.callAll('kill');
+    enemies2.callAll('kill');
     game.time.events.remove(greenEnemyLaunchTimer);
-    game.time.events.add(1000, launchGreenEnemy);
+    game.time.events.add(1000, launchEnemies2);
 
     //  Revive the player
     player.revive();
