@@ -43,14 +43,15 @@ body {
 		function preload() {
 			//  We need this because the assets are on github pages
 			//  Remove the next 2 lines if running locally
-			game.load.baseURL = 'https://ioniodi.github.io/Shooter/';
-			game.load.crossOrigin = 'anonymous';
+		//	game.load.baseURL = 'https://johnmous1.github.io/Shooter/';
+	//		game.load.crossOrigin = 'anonymous';
 			
 			game.load.image('starfield', 'assets/starfield.png');
 			game.load.image('ship', 'assets/ship.png');
 			game.load.image('bullet', 'assets/bullets/bullet.png');
              game.load.image('enemy2', '/assets/enemies/enemy2.png');
             game.load.spritesheet('explosion', '/assets/explode.png', 128, 128);
+            game.load.bitmapFont('spacefont', '/assets/spacefont/spacefont.png', '/assets/spacefont/spacefont.fnt');  
 		}
 		function create() {
 			
@@ -137,13 +138,14 @@ body {
         explosion.animations.add('explosion');
     });
              //  Shields stat
-     shields = game.add.text(game.world.width - 150, 10, 'Shields: ' + player.health +'%', { font: '20px Arial', fill: '#fff' });
+     shields = game.add.bitmapText(game.world.width - 250, 10, 'spacefont', '' + player.health +'%',50);
      shields.render = function () {
          shields.text = 'Shields: ' + Math.max(player.health, 0) +'%';
      };
-            //  Score
-     scoreText = game.add.text(10, 10, '', { font: '20px Arial', fill: '#fff' });
-     scoreText.render = function () {
+            shields.render();
+        //      Score
+          scoreText = game.add.bitmapText(10, 10, 'spacefont', '', 50);
+         scoreText.render = function () {
          scoreText.text = 'Score: ' + score;
      };
      scoreText.render();
@@ -290,7 +292,7 @@ body {
     enemy.kill();
             
              player.damage(enemy.damageAmount);
-    shields.render();
+            shields.render();
  }
             function hitEnemy(enemy, bullet) {
     var explosion = explosions.getFirstExists(false);
