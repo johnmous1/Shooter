@@ -110,8 +110,9 @@ body {
 			cursors = game.input.keyboard.createCursorKeys();
             
             //  Game over text
-            gameOver = game.add.text(game.world.centerX, game.world.centerY, 'GAME OVER!', { font: '84px Arial', fill: '#fff' });
-            gameOver.anchor.setTo(0.5, 0.5);  
+              gameOver = game.add.bitmapText(game.world.centerX, game.world.centerY, 'spacefont', 'GAME OVER!', 110);
+    gameOver.x = gameOver.x - gameOver.textWidth / 2;
+    gameOver.y = gameOver.y - gameOver.textHeight / 3;
             gameOver.visible = false;
             
 			fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
