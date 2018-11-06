@@ -24,6 +24,9 @@ body {
 		var player;
         var enemies2;
         var explosions;
+		var lasersound;
+		var explosionsound;
+		var music;
         
 		var starfield;
 		var cursors;
@@ -52,8 +55,16 @@ body {
              game.load.image('enemy2', '/assets/enemies/enemy2.png');
             game.load.spritesheet('explosion', '/assets/explode.png', 128, 128);
             game.load.bitmapFont('spacefont', '/assets/spacefont/spacefont.png', '/assets/spacefont/spacefont.fnt');  
+	    game.load.audio('laser'.'audio/laser1.mp3');
+	    game.load.audio('explosionsound'.'audio/Explosion+1.mp3');
+  	    game.load.audio('music'.'audio/music.mp3');
+			
 		}
 		function create() {
+			music=ame.add.audio('music');
+		 	lasersound=ame.add.audio('laser');
+			explosionsound=ame.add.audio('explosionsound');
+				
 			
 			game.scale.pageAlignHorizontally = true;
 			
@@ -137,6 +148,7 @@ body {
     explosions.setAll('anchor.y', 0.5);
     explosions.forEach( function(explosion) {
         explosion.animations.add('explosion');
+	    explosionsound.play();
     });
              //  Shields stat
      shields = game.add.bitmapText(game.world.width - 250, 10, 'spacefont', '' + player.health +'%',50);
@@ -290,6 +302,7 @@ body {
     explosion.body.velocity.y = enemy.body.velocity.y;
     explosion.alpha = 0.7;
     explosion.play('explosion', 30, false, true);
+		explosionsound.play();
     enemy.kill();
             
              player.damage(enemy.damageAmount);
@@ -301,8 +314,9 @@ body {
     explosion.body.velocity.y = enemy.body.velocity.y;
     explosion.alpha = 0.7;
     explosion.play('explosion', 30, false, true);
+    explosionsound.play();
     enemy.kill();
-    bullet.kill()
+    bullet.kill();
                 // Increase score
      score += enemy.damageAmount * 10;
      scoreText.render()
