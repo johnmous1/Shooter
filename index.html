@@ -148,7 +148,6 @@ body {
     explosions.setAll('anchor.y', 0.5);
     explosions.forEach( function(explosion) {
         explosion.animations.add('explosion');
-	    explosionsound.play();
     });
              //  Shields stat
      shields = game.add.bitmapText(game.world.width - 250, 10, 'spacefont', '' + player.health +'%',50);
