@@ -195,7 +195,7 @@ body {
             
              //  Shields stat
  //shields = game.add.text(game.world.width - 150, 10, 'Shields: ' + player.health +'%', { font: '20px Arial', fill: '#fff' });
-            shields = game.add.bitmapText(game.world.width - 250, 10, 'spacefont', '' + player.health +'%', 50);
+            shields = game.add.bitmapText(game.world.width - 320, 10, 'spacefont', '' + player.health +'%', 50);
         shields.render = function () {
         shields.text = 'Shields: ' + Math.max(player.health, 0) +'%';
     };
@@ -261,7 +261,7 @@ body {
      game.physics.arcade.overlap(player, greenEnemies, shipCollide, null, this);
      game.physics.arcade.overlap(greenEnemies, bullets, hitEnemy, null, this);
      game.physics.arcade.overlap(player, blueEnemies, shipCollide, null, this);
-     game.physics.arcade.overlap(bullets, blueEnemies, hitEnemy, null, this);
+     game.physics.arcade.overlap(blueEnemies, bullets, hitEnemy, null, this);
      game.physics.arcade.overlap(blueEnemyBullets, player, enemyHitsPlayer, null, this);
             
              //  Game over?
